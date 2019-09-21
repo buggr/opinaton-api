@@ -48,4 +48,4 @@ const listener = server.listen(process.env.PORT || 3030, () => {
     console.log("Node is listening on port: " + listener.address().port)
 })
 
-module.exports = { UsersModel, HackathonsModel, ProjectsModel, TeamsModel, user_db, hack_db, proj_db, team_db, app}
+module.exports = { UsersModel, HackathonsModel, ProjectsModel, TeamsModel, user_db, hack_db, proj_db, team_db }
