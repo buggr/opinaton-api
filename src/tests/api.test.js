@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { UsersModel, HackathonsModel, ProjectsModel, TeamsModel, user_db, hack_db, proj_db, team_db } = require('../../server')
+const { UsersModel, HackathonsModel, ProjectsModel, TeamsModel, user_db, hack_db, proj_db, team_db, app } = require('../../server')
 
 const mongoose = require('mongoose')
 
@@ -71,14 +71,14 @@ describe('API test enviroment / before all: ', function () {
         ProjectsModel.deleteMany({}, function (err) {})
         TeamsModel.deleteMany({}, function (err) {})
 
-        const res = chai.request(process.env.URL_API)
+        const res = chai.request(app || process.env.URL_API)
             .post('/users')
             .send(MOCK_USER_DEFAULT)
             .then(result => {
                 MOCK_USER_ID = result.body._id
             })
 
-        const res2 = chai.request(process.env.URL_API)
+        const res2 = chai.request(app || process.env.URL_API)
             .post('/hackathons')
             .send(MOCK_HACK_DEFAULT)
             .then(result => {
@@ -86,14 +86,14 @@ describe('API test enviroment / before all: ', function () {
                 MOCK_HACK_ID = body._id
             })
 
-        const res3 = chai.request(process.env.URL_API)
+        const res3 = chai.request(app || process.env.URL_API)
             .post('/projects')
             .send(MOCK_PROJ_DEFAULT)
             .then(result => {
                 MOCK_PROJ_ID = result.body._id
             })
         
-        const res4 = chai.request(process.env.URL_API)
+        const res4 = chai.request(app || process.env.URL_API)
             .post('/teams')
             .send(MOCK_TEAM_DEFAULT)
             .then(result => {
@@ -110,7 +110,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('cadastro', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .post('/users')
                 .send(MOCK_USER_CADASTRO)
                 .then(res => {
@@ -125,7 +125,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('listar todos os usuarios', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .get('/users')
                 .then(res => {
                     res.should.have.status(200)
@@ -144,7 +144,7 @@ describe('API test enviroment / before all: ', function () {
                 password: "senha123"
             }
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/users/${_id}`)
                 .send(expected)
                 .then(res => {
@@ -160,7 +160,7 @@ describe('API test enviroment / before all: ', function () {
     
         it('deletar um usuario', done => {
             const _id = MOCK_USER_ID
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .delete(`/users/${_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -181,7 +181,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('cadastro', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .post('/hackathons')
                 .send(MOCK_HACK_CADASTRO)
                 .then(res => {
@@ -196,7 +196,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('listar todos os hackathons', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .get('/hackathons')
                 .then(res => {
                     res.should.have.status(200)
@@ -215,7 +215,7 @@ describe('API test enviroment / before all: ', function () {
                 name: "Primeiro Hackathon do Mundo"
             }
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/hackathons/${_id}`)
                 .send(expected)
                 .then(res => {
@@ -233,7 +233,7 @@ describe('API test enviroment / before all: ', function () {
             const _id = MOCK_HACK_ID
             const team_id = MOCK_TEAM_ID
 
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/hackathons/${_id}/team/${team_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -248,7 +248,7 @@ describe('API test enviroment / before all: ', function () {
     
         it('deletar um hackathon', done => {
             const _id = MOCK_HACK_ID
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .delete(`/hackathons/${_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -269,7 +269,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('cadastro', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .post('/projects')
                 .send(MOCK_PROJ_CADASTRO)
                 .then(res => {
@@ -284,7 +284,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('listar todos os projetos', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .get('/projects')
                 .then(res => {
                     res.should.have.status(200)
@@ -303,7 +303,7 @@ describe('API test enviroment / before all: ', function () {
                 name: "Primeiro Projeto"
             }
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/projects/${_id}`)
                 .send(expected)
                 .then(res => {
@@ -320,7 +320,7 @@ describe('API test enviroment / before all: ', function () {
         it('definir um time dentro de um projeto', done => {
             const _id = MOCK_PROJ_ID
             const team_id = MOCK_TEAM_ID
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/projects/${_id}/team/${team_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -335,7 +335,7 @@ describe('API test enviroment / before all: ', function () {
     
         it('deletar um projeto', done => {
             const _id = MOCK_PROJ_ID
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .delete(`/projects/${_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -356,7 +356,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('cadastro', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .post('/teams')
                 .send(MOCK_TEAM_CADASTRO)
                 .then(res => {
@@ -371,7 +371,7 @@ describe('API test enviroment / before all: ', function () {
         })
     
         it('listar todos os times', done => {
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .get('/teams')
                 .then(res => {
                     res.should.have.status(200)
@@ -390,7 +390,7 @@ describe('API test enviroment / before all: ', function () {
                 name: "Primeiro Time"
             }
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/teams/${_id}`)
                 .send(expected)
                 .then(res => {
@@ -408,7 +408,7 @@ describe('API test enviroment / before all: ', function () {
             const _id = MOCK_TEAM_ID
             const user_id = MOCK_USER_ID
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/teams/${_id}/user/${user_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -425,7 +425,7 @@ describe('API test enviroment / before all: ', function () {
             const _id = MOCK_TEAM_ID
             const proj_id = MOCK_PROJ_ID
     
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .put(`/teams/${_id}/project/${proj_id}`)
                 .then(res => {
                     res.should.have.status(200)
@@ -440,7 +440,7 @@ describe('API test enviroment / before all: ', function () {
     
         it('deletar um time', done => {
             const _id = MOCK_TEAM_ID
-            chai.request(process.env.URL_API)
+            chai.request(app || process.env.URL_API)
                 .delete(`/teams/${_id}`)
                 .then(res => {
                     res.should.have.status(200)

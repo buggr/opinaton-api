@@ -1,6 +1,6 @@
 {
   "name": "opinaton-api",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "start": "nodemon server.js",
     "preinstall": "npm i -g pm2",
