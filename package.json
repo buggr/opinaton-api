@@ -1,0 +1,26 @@
+{
+  "name": "opinaton-api",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha src/tests/*.js -w",
+    "test:prod": "cross-env NODE_ENV=prod npm t"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "chai-things": "^0.2.0",
+    "cors": "^2.8.5",
+    "cross-env": "^6.0.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
+    "saslprep": "^1.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.2"
+  }
+}
