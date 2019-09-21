@@ -16,9 +16,12 @@ const UsersSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    avatar_url: {
+        type: String
+    }
     createdAt: {
       type: Date,
-      default: new Date()
+      default: Date.now
     }
 })
 

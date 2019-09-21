@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha src/tests/*.js -w",
+    "test": "mocha src/tests/*.js --exit",
     "test:prod": "cross-env NODE_ENV=prod npm t"
   },
   "dependencies": {

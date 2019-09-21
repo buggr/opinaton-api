@@ -27,8 +27,14 @@ app.use(cors())
 
 const connection = Mongodb.connect()
 const UsersModel = require('./src/db/models/Users')
+const HackathonsModel = require('./src/db/models/Hackathons')
+const ProjectsModel = require('./src/db/models/Projects')
+const TeamsModel = require('./src/db/models/Teams')
 
-const db = new Mongodb(connection, UsersModel)
+const user_db = new Mongodb(connection, UsersModel)
+const hack_db = new Mongodb(connection, HackathonsModel)
+const proj_db = new Mongodb(connection, ProjectsModel)
+const team_db = new Mongodb(connection, TeamsModel)
     
 app.use('/api', require('./src/routes/routes'))
 
@@ -36,4 +42,4 @@ const listener = server.listen(process.env.PORT || 3030, () => {
     console.log("Node is listening on port: " + listener.address().port)
 })
 
-module.exports = { UsersModel, db }
+module.exports = { UsersModel, HackathonsModel, ProjectsModel, TeamsModel, user_db, hack_db, proj_db, team_db }
