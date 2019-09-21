@@ -1,6 +1,6 @@
 {
   "name": "opinaton-api",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "scripts": {
     "start": "nodemon server.js",
     "test": "nyc --reporter=html mocha --timeout 10000 --exit src/tests/*.js",

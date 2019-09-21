@@ -14,7 +14,8 @@ module.exports = {
         const finder = await Users.findOne({'email': req.body.email})
 
         if(!finder) {
-            const user = await Users.create(req.body)
+            const nick = req.body.email.match(/(\w*)(?=@)/g)
+            const user = await Users.create({'nick': nick)
             return res.json(user)
         }
 

@@ -16,6 +16,9 @@ const UsersSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    nickname: {
+        type: String,
+    },
     avatar_url: {
         type: String
     },
