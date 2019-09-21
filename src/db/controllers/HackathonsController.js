@@ -20,7 +20,7 @@ module.exports = {
     },
 
     async store(req, res) {
-        const finder = await Hackathons.findOne('email': req.body.name)
+        const finder = await Hackathons.findOne({'name': req.body.name})
 
         if(!finder) {
             const hack = await Hackathons.create(req.body)
