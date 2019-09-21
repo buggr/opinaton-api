@@ -4,6 +4,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "preinstall": "npm i -g pm2",
+    "postinstall": "cross-env NODE_ENV=prod npm t",
     "test": "nyc --reporter=html mocha --timeout 10000 --exit src/tests/*.js",
     "test:prod": "cross-env NODE_ENV=prod npm t",
     "prod": "cross-env NODE_ENV=prod pm2-runtime ./server.js"
