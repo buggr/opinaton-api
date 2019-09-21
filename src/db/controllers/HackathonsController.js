@@ -20,9 +20,14 @@ module.exports = {
     },
 
     async store(req, res) {
-        const hack = await Hackathons.create(req.body)
+        const finder = await Hackathons.findOne('email': req.body.name)
 
-        return res.json(hack)
+        if(!finder) {
+            const hack = await Hackathons.create(req.body)
+            return res.json(hack)
+        }
+
+        return res.json(finder)
     },
 
     async update(req, res) {
