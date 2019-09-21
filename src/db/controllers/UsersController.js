@@ -11,9 +11,14 @@ module.exports = {
     },
 
     async store(req, res) {
-        const user = await User.create(req.body)
+        const finder = await User.findOne('email': req.body.email)
 
-        return res.json(user)
+        if(!finder) {
+            const user = await User.create(req.body)
+            return res.json(user)
+        }
+
+        return res.json(finder)
     },
 
     async update(req, res) {
