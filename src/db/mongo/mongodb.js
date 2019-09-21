@@ -1,4 +1,4 @@
-const ICrud = require("./../base/baseCrud")
+const Base = require("./../base/baseCrud")
 const mongoose = require('mongoose')
 
 const STATUS = {
@@ -8,7 +8,7 @@ const STATUS = {
     3: 'Disconectando'
 }
 
-class MongoDB extends ICrud {
+class MongoDB extends Base {
     constructor(connection, model) {
         super()
         this._connection = connection
@@ -35,23 +35,6 @@ class MongoDB extends ICrud {
         connection.once('open', () => console.log('database rodando!'))
 
         return connection
-    }
-
-    create(item) {
-        return this._model.create(item)
-        console.log('O item foi salvo em MongoDB')
-    }
-
-    read(item) {
-        return this._model.find(item)
-    }
-
-    update(id, item) {
-        return this._schema.updateOne({_id: id}, {$set: item})
-    }
-    
-    delete(id) {
-        return this._schema.deleteOne({_id: id})
     }
 }
 

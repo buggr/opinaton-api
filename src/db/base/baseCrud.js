@@ -4,23 +4,7 @@ class NotImplementedException extends Error {
     }
   }
   
-  class ICrud {
-    create(item) {
-      throw new NotImplementedException()
-    }
-  
-    read(query) {
-      throw new NotImplementedException()
-    }
-  
-    update(id, item) {
-      throw new NotImplementedException()
-    }
-  
-    delete(id) {
-      throw new NotImplementedException()
-    }
-  
+  class Base {
     isConnected() {
       throw new NotImplementedException()
     }
@@ -30,5 +14,5 @@ class NotImplementedException extends Error {
     }
   }
   
-  module.exports = ICrud
+  module.exports = Base
   

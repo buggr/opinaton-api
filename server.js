@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 
 app.use(cors())
 
+app.use(express.static('coverage'))
+
 const connection = Mongodb.connect()
 const UsersModel = require('./src/db/models/Users')
 const HackathonsModel = require('./src/db/models/Hackathons')
@@ -37,6 +39,10 @@ const proj_db = new Mongodb(connection, ProjectsModel)
 const team_db = new Mongodb(connection, TeamsModel)
     
 app.use('/api', require('./src/routes/routes'))
+
+app.get('/coverage', (req, res) => {
+    res.sendFile(__dirname + '/coverage/index.html')
+})
 
 const listener = server.listen(process.env.PORT || 3030, () => {
     console.log("Node is listening on port: " + listener.address().port)
