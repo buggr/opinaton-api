@@ -40,7 +40,7 @@ const team_db = new Mongodb(connection, TeamsModel)
     
 app.use('/api', require('./src/routes/routes'))
 
-app.get('/coverage', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/coverage/index.html')
 })
 
