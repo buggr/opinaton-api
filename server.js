@@ -22,6 +22,10 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
 app.use(cors())
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
