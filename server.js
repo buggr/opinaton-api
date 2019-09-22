@@ -21,10 +21,10 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
+app.use(cors())
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.use(cors())
 
 app.use(express.static('coverage'))
 
