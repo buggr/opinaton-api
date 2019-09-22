@@ -14,6 +14,12 @@ module.exports = {
         return res.json(team)
     },
 
+    async listOneByName(req, res) {
+        const team = await Teams.findOne({name: req.query.name})
+
+        return res.json(team)
+    },
+
     async linkProject(req, res) {
         const proj = await Projects.findOne({'_id': req.params.projId}).select('-ref_team -createdAt -__v')
 

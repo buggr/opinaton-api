@@ -10,6 +10,12 @@ module.exports = {
         return res.json(user)
     },
 
+    async listOneByName(req, res) {
+        const user = await Users.findOne({nickname: req.query.nickname})
+
+        return res.json(user)
+    },
+
     async store(req, res) {
         const finder = await Users.findOne({'email': req.body.email})
 

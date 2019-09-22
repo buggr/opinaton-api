@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 const ProjectsSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     createdAt: {
         type: Date,
         default: Date.now
     },
     feedback: {
-        type: [mongoose.Schema.Types.Mixed],
-        required: true
+        type: [mongoose.Schema.Types.Mixed]
     },
     ref_team: {
         type: mongoose.Schema.Types.Mixed

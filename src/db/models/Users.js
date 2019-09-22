@@ -18,6 +18,7 @@ const UsersSchema = new mongoose.Schema({
     },
     nickname: {
         type: String,
+        unique: true
     },
     avatar_url: {
         type: String

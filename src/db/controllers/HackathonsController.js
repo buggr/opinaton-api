@@ -18,6 +18,12 @@ module.exports = {
 
         return res.json(hack)
     },
+    
+    async listOneByName(req, res) {
+        const hack = await Hackathons.findOne({name: req.query.name})
+
+        return res.json(hack)
+    },
 
     async store(req, res) {
         const finder = await Hackathons.findOne({'name': req.body.name})

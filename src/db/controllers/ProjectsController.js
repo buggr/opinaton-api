@@ -19,6 +19,12 @@ module.exports = {
         return res.json(proj)
     },
 
+    async listOneByName(req, res) {
+        const proj = await Projects.findOne({name: req.query.name})
+
+        return res.json(proj)
+    },
+
     async store(req, res) {
         const proj = await Project.create(req.body)
 
