@@ -47,11 +47,21 @@ app.get('/', (req, res) => {
 
 io.on('connection', newConnection)
 
+let t
+
 function newConnection(socket) {
     console.log('Client connected: ' + socket.id)
 
+    socket.on('enteredPresentation', () => {
+        socket.join('feedback room')
+    })
+
+    socket.on('leavedPresentation', () => {
+        socket.leave('feedback room')
+    })
+
     socket.on('presentation', id => {
-        io.emit('runingPresentation', id)
+        io.to('feedback room').emit('runingPresentation', id)
     })
 
     socket.on('disconnect', () => console.log('Client disconnected'))

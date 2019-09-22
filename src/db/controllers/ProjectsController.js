@@ -11,8 +11,8 @@ module.exports = {
         return res.json(proj)
     },
 
-    async listSelected(req, res) {
-        const proj = await Project.findAndFilter(req.query)
+    async listOne(req, res) {
+        const proj = await Project.findOne({'_id': req.params.id})
 
         return res.json(proj)
     },
@@ -23,7 +23,16 @@ module.exports = {
         return res.json(proj)
     },
 
+    async updateFeeds(req, res) {
+        const proj = await Project.findById(req.params.id)
+        proj.feedback.push(req.body.feedback)
+        proj.save()
+
+        return res.json(proj)
+    },
+
     async update(req, res) {
+        console.log(req.body)
         const proj = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
         return res.json(proj)
