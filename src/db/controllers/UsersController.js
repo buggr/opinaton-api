@@ -17,11 +17,14 @@ module.exports = {
     },
 
     async store(req, res) {
-        const finder = await Users.findOne({'email': req.body.email})
+        const finder = await Users.findOne({email: req.body.email})
 
         if(!finder) {
             const nick = req.body.email.match(/(\w*)(?=@)/g)
-            const user = await Users.create({'nickname': nick)
+            const user = await Users.create({
+                nickname: nick,
+                ...req.body
+            })
             return res.json(user)
         }
 
