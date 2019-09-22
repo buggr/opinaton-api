@@ -17,7 +17,7 @@ module.exports = {
     },
 
     async listSelected(req, res) {
-        const team = await Teams..findAndFilter(req.query)
+        const team = await Teams.findAndFilter(req.query)
 
         return res.json(team)
     },
