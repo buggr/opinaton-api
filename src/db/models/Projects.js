@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
 
 const ProjectsSchema = new mongoose.Schema({
     name: {
@@ -17,5 +18,7 @@ const ProjectsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Mixed
     }
 })
+
+ProjectsSchema.plugin(mongooseFindAndFilter)
 
 module.exports = mongoose.model('Projects', ProjectsSchema)
