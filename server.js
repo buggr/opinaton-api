@@ -19,6 +19,7 @@ const Mongodb = require('./src/db/mongo/mongodb')
 const app = express()
 
 const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -42,6 +43,14 @@ app.use('/api', require('./src/routes/routes'))
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/coverage/index.html')
+})
+
+io.on('connection', socket => {
+    console.log('Client connected: ' + socket.id)
+
+    socket.on('presentation')
+
+    socket.on('disconnect', () => console.log('Client disconnected'))
 })
 
 const listener = server.listen(process.env.PORT || 3030, () => {
