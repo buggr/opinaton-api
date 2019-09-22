@@ -48,23 +48,29 @@ app.get('/', (req, res) => {
 io.on('connection', newConnection)
 
 let t
+let users = []
 
 function newConnection(socket) {
     console.log('Client connected: ' + socket.id)
 
-    socket.on('enteredPresentation', () => {
+    socket.on('enteredPresentation', user_id => {
+        users = users.filter(user => user.user_id !== user_id)
+        users.push({ user_id, teams: [] })
         socket.join('feedback room')
     })
 
-    socket.on('leavedPresentation', () => {
-        socket.leave('feedback room')
-    })
-
     socket.on('presentation', id => {
-        io.to('feedback room').emit('runingPresentation', id)
+        io.to('feedback room').emit('runingPresentation', id, users)
     })
 
     socket.on('disconnect', () => console.log('Client disconnected'))
+
+    socket.on('voted', (user_id, team_id) => {
+        const votedUser = users.filter(user => user.user_id === user_id)
+        users = users.filter(user => user.user_id !== user_id)
+        votedUser[0].teams.push({ team_id, voted: true })
+        users.push(votedUser[0])
+    })
 }
 
 const listener = server.listen(process.env.PORT || 3030, () => {
