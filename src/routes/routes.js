@@ -22,7 +22,6 @@ routes.delete('/hackathons/:id', HackathonsController.destroy)
 routes.get('/projects', ProjectsController.listAll)
 routes.get('/project', ProjectsController.listSelected)
 routes.post('/projects', ProjectsController.store)
-routes.put('/projects/:id/team/:teamId', ProjectsController.linkTeam)
 routes.put('/projects/:id', ProjectsController.update)
 routes.delete('/projects/:id', ProjectsController.destroy)
 

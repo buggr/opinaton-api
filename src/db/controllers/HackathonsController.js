@@ -22,7 +22,7 @@ module.exports = {
     async listSelectedTeamsByName(req, res) {
 
         const hack = await Hackathons.find({
-            teams:{
+            teams: {
                 $elemMatch: req.query
             }
         })

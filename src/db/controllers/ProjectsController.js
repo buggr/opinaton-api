@@ -5,14 +5,6 @@ const Project = require('./../models/Projects')
 const Teams = require('./../models/Teams')
 
 module.exports = {
-    async linkTeam(req, res) {
-        const team = await Teams.findOne({'_id': req.params.teamId}).select('-createdAt -projects -__v')
-
-        const proj = await Project.findByIdAndUpdate(req.params.id, { ref_team: team }, { new: true })
-
-        return res.json(proj)
-    },
-
     async listAll(req, res) {
         const proj = await Project.find()
 
@@ -20,7 +12,7 @@ module.exports = {
     },
 
     async listSelected(req, res) {
-        const proj = await Projects.findAndFilter(req.query)
+        const proj = await Project.findAndFilter(req.query)
 
         return res.json(proj)
     },

@@ -14,8 +14,9 @@ const ProjectsSchema = new mongoose.Schema({
     feedback: {
         type: [mongoose.Schema.Types.Mixed]
     },
-    ref_team: {
-        type: mongoose.Schema.Types.Mixed
+    description: {
+        type: String,
+        required: true
     }
 })
 
