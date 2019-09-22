@@ -45,13 +45,17 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/coverage/index.html')
 })
 
-io.on('connection', socket => {
+io.on('connection', newConnection)
+
+function newConnection(socket) {
     console.log('Client connected: ' + socket.id)
 
-    socket.on('presentation')
+    socket.on('presentation', id => {
+        io.emit('runingPresentation', id)
+    })
 
     socket.on('disconnect', () => console.log('Client disconnected'))
-})
+}
 
 const listener = server.listen(process.env.PORT || 3030, () => {
     console.log("Node is listening on port: " + listener.address().port)
