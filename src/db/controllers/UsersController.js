@@ -13,7 +13,7 @@ module.exports = {
     },
 
     async listSelected(req, res) {
-        const user = await Users..findAndFilter(req.query)
+        const user = await Users.findAndFilter(req.query)
 
         return res.json(user)
     },
