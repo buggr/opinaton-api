@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const mongooseFindAndFilter = require('mongoose-find-and-filter')
-mongoose.plugin(mongooseFindAndFilter)
 mongoose.set('useFindAndModify', false)
 
 const Hackathons = require('./../models/Hackathons')

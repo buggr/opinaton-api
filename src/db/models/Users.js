@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
 
 const UsersSchema = new mongoose.Schema({
     email: {
@@ -28,5 +29,7 @@ const UsersSchema = new mongoose.Schema({
       default: Date.now
     }
 })
+
+UsersSchema.plugin(mongooseFindAndFilter)
 
 module.exports = mongoose.model('User', UsersSchema)

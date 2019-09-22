@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
 
 const HackathonsSchema = new mongoose.Schema({
     name: {
@@ -23,5 +24,7 @@ const HackathonsSchema = new mongoose.Schema({
         }]
     }
 })
+
+HackathonsSchema.plugin(mongooseFindAndFilter)
 
 module.exports = mongoose.model('Hackathons', HackathonsSchema)

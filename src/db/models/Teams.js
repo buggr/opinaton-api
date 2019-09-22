@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
 
 const TeamsSchema = new mongoose.Schema({
     name: {
@@ -22,6 +23,8 @@ const TeamsSchema = new mongoose.Schema({
         }]
     }
 })
+
+TeamsSchema.plugin(mongooseFindAndFilter)
 
 function arrayLimit(val) {
     return val.length <= 5
