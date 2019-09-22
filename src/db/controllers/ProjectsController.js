@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
+mongoose.plugin(mongooseFindAndFilter)
 mongoose.set('useFindAndModify', false)
 
 const Project = require('./../models/Projects')
@@ -19,8 +21,8 @@ module.exports = {
         return res.json(proj)
     },
 
-    async listOneByName(req, res) {
-        const proj = await Projects.findOne({name: req.query.name})
+    async listSelected(req, res) {
+        const proj = await Projects.findAndFilter(req.query)
 
         return res.json(proj)
     },

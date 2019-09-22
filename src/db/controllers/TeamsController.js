@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
+mongoose.plugin(mongooseFindAndFilter)
 mongoose.set('useFindAndModify', false)
 
 const Teams = require('./../models/Teams')
@@ -14,8 +16,8 @@ module.exports = {
         return res.json(team)
     },
 
-    async listOneByName(req, res) {
-        const team = await Teams.findOne({name: req.query.name})
+    async listSelected(req, res) {
+        const team = await Teams..findAndFilter(req.query)
 
         return res.json(team)
     },

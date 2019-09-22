@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongooseFindAndFilter = require('mongoose-find-and-filter')
+mongoose.plugin(mongooseFindAndFilter)
 mongoose.set('useFindAndModify', false)
 
 const Hackathons = require('./../models/Hackathons')
@@ -19,8 +21,8 @@ module.exports = {
         return res.json(hack)
     },
     
-    async listOneByName(req, res) {
-        const hack = await Hackathons.findOne({name: req.query.name})
+    async listSelected(req, res) {
+        const hack = await Hackathons.findAndFilter(req.query)
 
         return res.json(hack)
     },
