@@ -19,8 +19,13 @@ module.exports = {
         return res.json(hack)
     },
     
-    async listSelected(req, res) {
-        const hack = await Hackathons.findAndFilter(req.query)
+    async listSelectedTeamsByName(req, res) {
+
+        const hack = await Hackathons.find({
+            teams:{
+                $elemMatch: req.query
+            }
+        })
 
         return res.json(hack)
     },

@@ -13,7 +13,7 @@ routes.put('/users/:id', UsersController.update)
 routes.delete('/users/:id', UsersController.destroy)
 
 routes.get('/hackathons', HackathonsController.listAll)
-routes.get('/hackathon', HackathonsController.listSelected)
+routes.get('/hackathon', HackathonsController.listSelectedTeamsByName)
 routes.post('/hackathons', HackathonsController.store)
 routes.put('/hackathons/:id/team/:teamId', HackathonsController.linkTeams)
 routes.put('/hackathons/:id', HackathonsController.update)
